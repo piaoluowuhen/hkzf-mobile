@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel,Flex } from 'antd-mobile';
+import { Carousel,Flex,WingBlank, WhiteSpace } from 'antd-mobile';
 import axios from 'axios'
 import nav1 from '../../assets/images/nav-1.png'
 import nav2 from '../../assets/images/nav-2.png'
@@ -32,7 +32,18 @@ class HomeIndex extends React.Component {
         swipers:[],
         isSwiperLoad:false,
         groups:[],
+        news:[],
+        city:'上海',
+        cityId:''
       }
+      async getCity(cityName){
+        const {data:{body}} = await axios.get('http://localhost:8080/area/info',{prams:`name=${cityName}`})
+        console.log(body);
+        this.setState({
+            city:body.label,
+            cityId:body.value
+        })
+        }
      async getSwiperData(){
         const {data:{body}} = await axios.get('http://localhost:8080/home/swiper')   
         this.setState({
@@ -46,8 +57,15 @@ class HomeIndex extends React.Component {
         this.setState({
             groups:body,
         })
-        console.log(this.state.groups);
+        // console.log(this.state.groups);
       }
+    async getNews(){
+      const {data:{body}} = await axios.get('http://localhost:8080/home/news',{params:'area=AREA%7C88cff55c-aaa4-e2e0'})   
+      this.setState({
+          news:body,
+      })
+      console.log(this.state.news);
+    }
       renderSwipersFn(){
           return this.state.swipers.map(val => (
             <a
@@ -83,14 +101,58 @@ class HomeIndex extends React.Component {
             </span>       
         )
       }
+      renderNews(){
+        return this.state.news.map(item=>
+          <Flex className='newsitem'  key={item.id}>
+            <Flex.Item className='img'><img src={`http://localhost:8080${item.imgSrc}`}></img></Flex.Item>
+            <Flex.Item className='text'>
+            <div>
+              <div className='title'>{item.title}</div>
+            </div>
+            <span className='left'>{item.date}</span>
+            <span className='right'>{item.from}</span>
+          </Flex.Item>
+          </Flex>
+          )
+      }
+      renderSearch(){
+        return (<div className='a'><Flex  justify='between'>
+          <Flex.Item className='l'>
+            <Flex>
+            <Flex.Item className='l2' onClick={()=>this.props.history.push('/address')}>
+            <Flex>
+            <div className='address'>{this.state.city}</div><i className='iconfont icon-arrow'></i>  |
+            </Flex>
+            </Flex.Item>
+            <Flex.Item className='r2' onClick={()=>this.props.history.push('/search')}>
+            <div>点击搜索</div>
+            </Flex.Item>
+            </Flex>
+          </Flex.Item>
+          <Flex.Item className='r' onClick={()=>this.props.history.push('/map')}><i className='iconfont icon-map'></i></Flex.Item>
+        </Flex></div>)
+
+      }
     componentDidMount(){
         this.getSwiperData()
         this.getGroups()
+        this.getNews()
+        // 百度地图IP定位api
+       var myCity = new window.BMapGL.LocalCity();
+       myCity.get((result)=>{
+        var cityName = result.name;
+        // alert("当前定位城市:" + cityName);
+        this.getCity(cityName)         
+     });
     }  
     render(){
        return <div className='homeindex'>
+        <div className='swiper' style={{height:212}}>
+          {/* 搜索 */}
+          <WingBlank>
+          <div className='search'>{this.renderSearch()}</div></WingBlank>
            {/* 轮播 */}
-        <div style={{height:212}}>{this.state.isSwiperLoad?<Carousel autoplay infinite>{this.renderSwipersFn()}</Carousel>:''}</div>
+          {this.state.isSwiperLoad?<Carousel autoplay infinite>{this.renderSwipersFn()}</Carousel>:''}</div>
             {/* nav */}
         <Flex className='nav'>{this.renderNavData()}</Flex>
             {/* groups */}
@@ -98,8 +160,13 @@ class HomeIndex extends React.Component {
         <Flex justify='between'> 
         <span className='lefttext'>租房小组</span><span className='righttext'>更多</span>
         </Flex>
-        <div className='group'>{this.renderGroups()}</div>
-        
+        <div className='group'>{this.renderGroups()}</div>       
+        </div>
+        {/* news */}
+        <div className='news'>
+          <h3>推荐选择</h3>
+          <div>{this.renderNews()}</div>
+
         </div>
     </div>
 }

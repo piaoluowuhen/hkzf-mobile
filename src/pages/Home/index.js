@@ -14,7 +14,7 @@ const arr = [{
 },{
   title:'找房',
   key:'/home/list',
-  icon:' icon-infom'
+  icon:'icon-findHouse'
 },{
   title:'资源',
   key:'/home/news',
@@ -62,6 +62,7 @@ class Home extends React.PureComponent {
         <Route path='/home/list' component={List}></Route>
         <Route path='/home/news' component={News}></Route>
         <Route path='/home/profile' component={Profile}></Route>
+
         {/*tabbar*/}
         <div >
           <TabBar

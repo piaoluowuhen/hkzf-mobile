@@ -2,6 +2,7 @@ html,body {
   padding: 0;
   margin: 0;
   height: 100%;
+  width: 100%;
   font-family: 'Microsoft YaHei';
   color: #333;
   background-color: #fff;
@@ -11,4 +12,10 @@ html,body {
 * {
   box-sizing: border-box;
   touch-action: pan-y;
+}
+html,
+body,
+#root,
+.App{
+  height: 100%;
 }
