@@ -1,0 +1,43 @@
+.homeindex {
+    background-color: #F4F4F4;
+}
+.nav {
+    background-color: #FFFFFF;
+    padding: 10px 0;
+    img {
+        width: 48px;
+    }
+    span {
+        font-size: 13px;
+        margin-top: 8px;
+    }
+}
+.groups {
+    padding: 8px;
+    .lefttext {
+        font-weight: 600;
+        margin-left: 5px;
+    }
+    .righttext {
+        font-weight: 300;
+    }
+    .groupsitem {
+        text-align: center;
+        background-color: #FFFFFF;
+        margin: 3px;
+        display: inline-block;
+        width: 48%;
+        padding: 15px 10px;
+        .goupsl {
+            font-weight: 600;
+        }
+        .goupsr {
+            margin-top: 5px;
+            font-size: 10px;
+            font-weight: 300;
+        }
+    }
+    .group {
+        margin-top: 8px;
+    }
+}
