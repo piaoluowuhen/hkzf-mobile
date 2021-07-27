@@ -1,6 +1,6 @@
 import React from 'react';
 import { Carousel,Flex,WingBlank } from 'antd-mobile';
-import axios from 'axios'
+import axios from '../../utils/axios'
 import nav1 from '../../assets/images/nav-1.png'
 import nav2 from '../../assets/images/nav-2.png'
 import nav3 from '../../assets/images/nav-3.png'
@@ -40,7 +40,7 @@ class HomeIndex extends React.Component {
       }
   
      async getSwiperData(){
-        const {data:{body}} = await axios.get('http://localhost:8080/home/swiper')   
+        const {data:{body}} = await axios.get('/home/swiper')   
         this.setState({
             swipers:body,
             isSwiperLoad:true,
@@ -48,14 +48,14 @@ class HomeIndex extends React.Component {
         // console.log(this.state.swipers);
       }
       async getGroups(){
-        const {data:{body}} = await axios.get('http://localhost:8080/home/groups',{params:'area=AREA%7C88cff55c-aaa4-e2e0'})   
+        const {data:{body}} = await axios.get('/home/groups',{params:{area:'AREA%7C88cff55c-aaa4-e2e0'}})   
         this.setState({
             groups:body,
         })
         // console.log(this.state.groups);
       }
     async getNews(){
-      const {data:{body}} = await axios.get('http://localhost:8080/home/news',{params:'area=AREA%7C88cff55c-aaa4-e2e0'})   
+      const {data:{body}} = await axios.get('/home/news',{params:'area=AREA%7C88cff55c-aaa4-e2e0'})   
       this.setState({
           news:body,
       })

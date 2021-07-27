@@ -1,0 +1,16 @@
+.list {
+    .am-navbar {
+        background-color: #f6f5f6;
+        position: relative;
+        .top {
+            position: absolute;
+            right: 0;
+            width: 90%;
+            margin-left: 60px;
+            .r2 {
+                flex: 3;
+            }
+        }
+    }
+    
+}

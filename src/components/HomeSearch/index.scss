@@ -1,0 +1,18 @@
+.a{
+    background-color: #ffffff;
+    margin:  0 20px;
+    line-height: 34px;
+    .r {
+    flex: 0 !important;
+    width: 24px;
+    padding-right: 30px;
+    }
+    .l{
+        padding-left: 10px;
+        .r2 {
+            flex: 4;
+            font-weight: 200;
+        }
+    }
+
+    }

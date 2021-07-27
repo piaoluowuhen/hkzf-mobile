@@ -1,8 +1,8 @@
 import React from 'react';
 import './index.scss'
 import NavBarComponent from '../../components/headNavBar'
-import axios from 'axios'
-import { Flex } from 'antd-mobile';
+import axios from '../../utils/axios'
+import { Flex,Toast } from 'antd-mobile';
 
 class Map extends React.Component {
      state={
@@ -23,7 +23,7 @@ class Map extends React.Component {
         
     }
     renderMsg(){                
-        return  <div>
+        return  <div >
             <div className='top'>
             <Flex justify='between'>
                 <span className='l'>房屋列表</span>
@@ -31,25 +31,24 @@ class Map extends React.Component {
             </Flex>
             </div>
             { this.state.msgData.map(item=>
-            <Flex className='newsitem'  key={item.houseCode}>
+            <Flex className='item' align='start' key={item.houseCode}>
               <Flex.Item className='img'><img src={`http://localhost:8080${item.houseImg}`}></img></Flex.Item>
-              <Flex.Item className='text'>
-              <div>
-                <div className='title'>{item.title}</div>
-              </div>
-              <span >{item.desc}</span>
-              <span>{item.tags}</span>
-            </Flex.Item>
+              <Flex.Item className='text'>             
+              <div className='title'>{item.title}</div>            
+              <div className='desc'>{item.desc}</div>
+              <span className='tags'>{item.tags}</span>
+              <div className='price'>{item.price}元/月</div>
+              </Flex.Item>
             </Flex>
             )}</div>
     }
    async getHouse(id){
-        const {data:{body}}=await axios.get('http://localhost:8080/area/map',{params:{id}})
+        const {data:{body}}=await axios.get('/area/map',{params:{id}})
         console.log(body);
         return body
     }
     async getHouseMsg(id){
-        const {data:{body:{list}}}=await axios.get(`http://localhost:8080/houses?cityId=${id}`)
+        const {data:{body:{list}}}=await axios.get(`/houses?cityId=${id}`)
         console.log(list);
         return list
     }
@@ -76,6 +75,11 @@ class Map extends React.Component {
                 var cityCtrl = new window.BMapGL.CityListControl();  // 添加城市列表控件
                 that.renderMapText(map,that.state.haoseData,11)//渲染文本覆盖物
                 map.addControl(cityCtrl);
+                map.addEventListener('movestart',()=>{
+                    that.setState({
+                        msg:false
+                    })
+                })
             }else{
                 alert('您选择的地址没有解析到结果！');
             }
@@ -125,7 +129,8 @@ class Map extends React.Component {
         })
     }
         labelmap.addEventListener("click",async function(){  
-            console.log("您点击了"+item.label); 
+            // console.log("您点击了"+item.label); 
+            Toast.loading('Loading...', 0)
                if(number===11){
                 let twoHouse =await that.getHouse(item.value)
                 map.clearOverlays()//清除地图上所有覆盖物
@@ -135,20 +140,22 @@ class Map extends React.Component {
                 map.clearOverlays()//清除地图上所有覆盖物
                 that.renderMapText(map,twoHouse,15) 
                }else {
-                console.log(item);
+                // console.log(item);
                 let point = new window.BMapGL.Point(item.coord.longitude, item.coord.latitude)
-                // map.panTo(point)
+                map.panTo(point)
+                map.panBy(0,-240)
                 let msgData  =await that.getHouseMsg(item.value)
                 that.setState({
                     msg:true,
                     msgData:msgData
                 })
                }
-            
+               Toast.hide()
         });
     });
     }
    async componentDidMount(){
+       console.log(this.state.city.value);
        let data=await this.getHouse(this.state.city.value)
         this.setState({
             haoseData:data

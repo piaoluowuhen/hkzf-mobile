@@ -1,7 +1,7 @@
 import React from 'react';
 import { Toast } from 'antd-mobile';
 import './index.scss'
-import axios from 'axios'
+import axios from '../../utils/axios'
 import {getCity} from '../../utils'
 import {AutoSizer,List} from 'react-virtualized';
 import NavBarComponent from '../../components/headNavBar'
@@ -32,7 +32,7 @@ class CityList extends React.Component {
         this.cityListComponent=React.createRef()
 }
    async getCityList(){
-         const {data:{body}} = await axios.get('http://localhost:8080/area/city?level=1')
+         const {data:{body}} = await axios.get('/area/city?level=1')
          let obj = {}
          let arr = Object.keys(obj)
          body.forEach(item => {
@@ -59,7 +59,7 @@ class CityList extends React.Component {
          })
     }
     async getHotCity (){
-        const {data:{body}}=await axios.get('http://localhost:8080/area/hot')
+        const {data:{body}}=await axios.get('/area/hot')
         //当前定位城市
         let city =await getCity()
         return {

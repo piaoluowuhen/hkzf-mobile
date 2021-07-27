@@ -3,9 +3,9 @@
 }
 .map {
     padding-top: 45px;
+    width: 100%;
     .navbar {
         margin-top: -45px;
-
     }
     .houseMsg {
         position: fixed;
@@ -14,37 +14,67 @@
         background-color: #fff;
         z-index: 10;
         height: 360px;
-    .newsitem {
-        height: 100px;
-        margin: 5px 0;
-    img {
-        height: 100%;
         width: 100%;
-    }
-    .text {
-        position: relative;
-        flex:2;
-        height: 100px;
-        padding: 5px;
-        .title {
-            font-weight: 500;
-        }
+        overflow:scroll;
+        padding-top: 40px;
 
-    }
-}
-    .top {
-        background-color: #BEC0C0;
-        height: 40px;
-        line-height: 40px;
-        .l {
-            font-weight: 600;
-            font-size: 16px;
-            margin-left: 10px;
+
+            .item {
+                height: 120px;
+                margin: 5px 10px;
+                border-bottom: 1px solid rgba(0,0,0,0.3);
+        
+            .img {
+                height: 100px;
+                img {
+                    height: 100%; 
+                    width: 100%;
+                }
+            }
+            .text{
+                flex: 2;
+        
+                .title {
+                    font-size: 18px;
+                    font-weight: 600;
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space: nowrap;
+                }
+                .desc {
+                    color: rgba(0,0,0,0.5);
+                    margin: 6px 0;
+                }
+                .tags {
+                    background-color: rgb(192, 221, 188);
+                    color: rgb(93, 180, 130);
+                }
+                .price {
+                    margin-top: 14px;
+                    font-weight: 800;
+                    color: rgb(235, 38, 38);
+                    font-size: 16px;
+                }
+            }
         }
-        .r {
-            margin-right: 10px;
-        }
-    }
+            .top {
+                position: fixed;
+                width: 100%;
+                top: 305px;
+                background-color: #BEC0C0;
+                height: 40px;
+                line-height: 40px;
+                .l {
+                    font-weight: 600;
+                    font-size: 16px;
+                    margin-left: 10px;
+                }
+                .r {
+                    margin-right: 10px;
+                }
+            }
+        
+
 }
 
 }
