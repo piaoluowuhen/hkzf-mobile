@@ -1,11 +1,13 @@
 import React from 'react';
-import { Carousel,Flex,WingBlank, WhiteSpace } from 'antd-mobile';
+import { Carousel,Flex,WingBlank } from 'antd-mobile';
 import axios from 'axios'
 import nav1 from '../../assets/images/nav-1.png'
 import nav2 from '../../assets/images/nav-2.png'
 import nav3 from '../../assets/images/nav-3.png'
 import nav4 from '../../assets/images/nav-4.png'
 import './homeindex.scss'
+import {getCity} from '../../utils'
+
 let navData = [{
     id:1,
     img:nav1,
@@ -36,14 +38,7 @@ class HomeIndex extends React.Component {
         city:'上海',
         cityId:''
       }
-      async getCity(cityName){
-        const {data:{body}} = await axios.get('http://localhost:8080/area/info',{prams:`name=${cityName}`})
-        console.log(body);
-        this.setState({
-            city:body.label,
-            cityId:body.value
-        })
-        }
+  
      async getSwiperData(){
         const {data:{body}} = await axios.get('http://localhost:8080/home/swiper')   
         this.setState({
@@ -64,7 +59,6 @@ class HomeIndex extends React.Component {
       this.setState({
           news:body,
       })
-      console.log(this.state.news);
     }
       renderSwipersFn(){
           return this.state.swipers.map(val => (
@@ -119,7 +113,7 @@ class HomeIndex extends React.Component {
         return (<div className='a'><Flex  justify='between'>
           <Flex.Item className='l'>
             <Flex>
-            <Flex.Item className='l2' onClick={()=>this.props.history.push('/address')}>
+            <Flex.Item className='l2' onClick={()=>this.props.history.push('/citylist')}>
             <Flex>
             <div className='address'>{this.state.city}</div><i className='iconfont icon-arrow'></i>  |
             </Flex>
@@ -133,25 +127,22 @@ class HomeIndex extends React.Component {
         </Flex></div>)
 
       }
-    componentDidMount(){
+     async componentDidMount(){
         this.getSwiperData()
         this.getGroups()
         this.getNews()
-        // 百度地图IP定位api
-       var myCity = new window.BMapGL.LocalCity();
-       myCity.get((result)=>{
-        var cityName = result.name;
-        // alert("当前定位城市:" + cityName);
-        this.getCity(cityName)         
-     });
+        let city =await getCity()
+          this.setState({
+              city:city.label,
+              cityId:city.value
+          })
+          
     }  
     render(){
        return <div className='homeindex'>
         <div className='swiper' style={{height:212}}>
           {/* 搜索 */}
-          <WingBlank>
-          <div className='search'>{this.renderSearch()}</div></WingBlank>
-           {/* 轮播 */}
+          <div className='search'>{this.renderSearch()}</div>
           {this.state.isSwiperLoad?<Carousel autoplay infinite>{this.renderSwipersFn()}</Carousel>:''}</div>
             {/* nav */}
         <Flex className='nav'>{this.renderNavData()}</Flex>

@@ -64,7 +64,7 @@ class Home extends React.PureComponent {
         <Route path='/home/profile' component={Profile}></Route>
 
         {/*tabbar*/}
-        <div >
+        
           <TabBar
             noRenderContent={true}
             unselectedTintColor="#949494"
@@ -73,7 +73,8 @@ class Home extends React.PureComponent {
           >
             {this.renderTabbarItem()} 
           </TabBar>
-        </div>
+        
+
         </div>)     
     }
 }

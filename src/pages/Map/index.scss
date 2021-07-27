@@ -1,3 +1,57 @@
 .map,#container{
     height: 100%;
 }
+.map {
+    padding-top: 45px;
+    .navbar {
+        margin-top: -45px;
+
+    }
+    .houseMsg {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: #fff;
+        z-index: 10;
+        height: 360px;
+    .newsitem {
+        height: 100px;
+        margin: 5px 0;
+    img {
+        height: 100%;
+        width: 100%;
+    }
+    .text {
+        position: relative;
+        flex:2;
+        height: 100px;
+        padding: 5px;
+        .title {
+            font-weight: 500;
+        }
+
+    }
+}
+    .top {
+        background-color: #BEC0C0;
+        height: 40px;
+        line-height: 40px;
+        .l {
+            font-weight: 600;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .r {
+            margin-right: 10px;
+        }
+    }
+}
+
+}
+.maptext {
+    text-align: center;padding-top: 6px;
+    p {
+        line-height: 20px;
+        margin: 0;padding: 0;
+    }
+}

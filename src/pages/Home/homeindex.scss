@@ -42,10 +42,14 @@
     }
 }
 .news {
+    background-color: #FFFFFF;
+    margin: 0 10px;
     padding: 0 10px;
+    padding-top: 1px;
     .newsitem {
         height: 100px;
         margin: 5px 0;
+        border-top: 1px solid rgb(228, 215, 215);
     img {
         height: 100%;
         width: 100%;

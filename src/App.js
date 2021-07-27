@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Route path='/' render={()=><Redirect to='/home'/>} ></Route>
       <Route path='/home' component={Home}></Route>
-      <Route path='/city' component={CityList}></Route>
+      <Route path='/citylist' component={CityList}></Route>
       <Route path='/search' component={Search}></Route>
       <Route path='/map' component={Map}></Route>
     </div>
