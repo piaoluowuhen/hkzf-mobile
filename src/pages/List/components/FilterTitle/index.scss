@@ -1,0 +1,17 @@
+.select {
+    height: 40px;
+    line-height: 40px;
+    text-align: center !important;
+    border-bottom: 1px solid rgba(54, 43, 43, 0.2);
+    span {
+        font-size: 16px;
+    }
+    .icon-arrow{
+        font-size: 14px !important;
+        color: rgba(54, 43, 43, 0.4);
+        vertical-align:middle;
+    }
+}
+.is {
+    color: #12A676;
+}

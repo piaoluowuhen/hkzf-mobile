@@ -89,9 +89,9 @@ class CityList extends React.Component {
         console.log(item.label);
        if(hasCity.indexOf(item.label)!==-1){
            localStorage.setItem('hkzf_city', JSON.stringify(item))
-           this.props.history.push('/home')
+           this.props.history.go(-1)
        }else {
-       this.props.history.push('/home')
+       this.props.history.go(-1)
        Toast.info('只有北，上，广，深的房源', 2)
        }
     }   

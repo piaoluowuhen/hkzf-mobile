@@ -1,0 +1,19 @@
+.filter {
+    position: relative;
+    .t {
+        width:  100%;
+        position: absolute;
+        top: -45px;
+        height:45px;
+        z-index: 1;
+        background-color: rgba(43, 44, 43, 0.4) ;
+    }
+    .b {
+        width:  100%;
+        position: absolute;
+        bottom: -600px;
+        height: 300px;
+        z-index: 1;
+        background-color: rgba(43, 44, 43, 0.4) ;
+    }
+}

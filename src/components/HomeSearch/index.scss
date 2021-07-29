@@ -1,14 +1,17 @@
 .a{
-    background-color: #ffffff;
     margin:  0 20px;
+    margin-right: 6px;
     line-height: 34px;
     .r {
     flex: 0 !important;
     width: 24px;
-    padding-right: 30px;
+    padding-right: 26px;
+    padding-left: 4px;
     }
     .l{
         padding-left: 10px;
+    background-color: #ffffff;
+
         .r2 {
             flex: 4;
             font-weight: 200;

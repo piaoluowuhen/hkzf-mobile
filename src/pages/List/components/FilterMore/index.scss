@@ -1,0 +1,70 @@
+.more {
+    width: 375px;
+    height: 667px;
+    position: absolute;
+    top: -45px;
+    left: 0;
+    z-index: 1;
+    .mask {
+    width:  100%;
+    height: 100%;
+    background-color: rgba(43, 44, 43, 0.4) ;
+    }
+    .condition {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 75%;
+    height: 100%;
+    padding: 0 16px;
+    padding-bottom: 59px;
+    background-color: #fff;
+    overflow: scroll;
+    }
+    .buttom {
+    position: fixed;
+    width: 75%;
+    height: 60px;
+    bottom: 0;
+    right: 0;
+    .cancel {
+        width: 40%;
+        height: 60px;
+        border: 0;
+        color: #12A676;
+    }
+    .confirm {
+        width: 60%;
+        height: 60px;
+        border: 0;
+        background-color: #12A676;
+        color: #fff;
+
+    }
+    }
+}
+.h {
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding-bottom: 20px;
+    .title {
+        font-size: 16px;
+        margin: 16px 0;
+        font-weight: 600;
+    }
+    .is {
+        background-color: #DAF6ED;
+        border: 1px solid #c6f1e4;
+    }
+}
+.tag {
+    display: inline-block;
+    width: 66px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 5px;
+    margin: 0 8px;
+    margin-bottom: 10px;
+}
