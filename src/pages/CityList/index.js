@@ -78,7 +78,9 @@ class CityList extends React.Component {
         let number =  this.state.citylist[this.state.citykey[index].toLowerCase()].length
         return  (number*51 + 40)      
     }
+    //提供行信息
     onRowsRendered=({startIndex})=>{
+        // console.log(startIndex);
         if(this.state.key!==startIndex){
         this.setState({
             key:startIndex

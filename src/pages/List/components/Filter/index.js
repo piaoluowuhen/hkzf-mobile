@@ -11,29 +11,59 @@ class Filter extends React.Component{
     picdata:{},
     city : JSON.parse(localStorage.getItem('hkzf_city')),
     def:{a:["area", "null"],b:["null"],c:["null"]},
-    defmore:[]
+    defmore:[],
   }
+  //more组件确定 操作params请求参数
   moresure=(arr)=>{
     console.log(arr);
+    console.log(this.params);
+    if(arr.length!==0){
+    this.params = {...this.params,more:arr.join(',')}
+    }
     this.setState({
       defmore:arr
     })
-
+    //调用父组件函数请求条件数据
+    this.props.select(this.params)
+  }
+  //picker组件确定
+  picsure=()=>{
+    console.log(this.params);
+    console.log(this.state.def);
+    let str = 'null'
+    if(this.state.def.a.length===2){
+      str = 'null'
+    }else if(this.state.def.a.length===3&&this.state.def.a[2]!=='null'){
+      str = this.state.def.a[2]
+    }else {
+      str = this.state.def.a[1]
+    }
+    this.params={
+      cityId:this.state.city.value,
+      [this.state.def.a[0]]:str,
+      mode:this.state.def.b[0],
+      price:this.state.def.c[0],
+      more:'null',
+      start:1,
+      end:20
+    }
+    console.log(this.params);
+     this.setState({
+      dis:'',
+    })
   }
    getdata= async()=>{
   const {data:{body}} =await axios.get('/houses/condition',{params:{id:this.state.city.value}})
-    console.log(body);
     this.setState({
       picdata:body
     })
   }
-  //选项改变就改变初始值
+  //picker组件 选项改变就改变初始值
   sureselect=(key,value)=>{
     console.log(key+'--'+value);
     this.setState((prevstate)=>{
       return{
       def:{...prevstate.def,[key]:value},
-      // dis:''
     }})
   }
   //点击4个筛选项
@@ -67,6 +97,9 @@ class Filter extends React.Component{
     this.setState({})
   }
   componentDidMount(){
+    this.params={
+     cityId:this.state.city.value, area: "null", mode: "null", price: "null", more: "null",start:1,end:20
+    }
     this.getdata()
   }
   renderpic=()=>{
@@ -92,7 +125,8 @@ class Filter extends React.Component{
         onclickmask={this.onclickmask}
         data={arr}
         def={this.state.def}
-        sureselect={this.sureselect}>          
+        sureselect={this.sureselect}
+        picsure={this.picsure}>          
         </FilterPicker>
     }
   }

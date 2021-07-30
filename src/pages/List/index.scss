@@ -19,5 +19,52 @@
             }
         }
     }
+    .loading {
+        width: 100%;
+        height: 120px;
+        text-align: center;
+        line-height: 120px;
+
+    }
+    .item {
+        height: 120px;
+        border-bottom: 1px solid rgba(0,0,0,0.3);
+        padding: 5px;
+        padding-top: 10px;
+
+    .img {
+        height: 100px;
+        img {
+            height: 100%; 
+            width: 100%;
+        }
+    }
+    .text{
+        flex: 2;
+
+        .title {
+            font-size: 16px;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }
+        .desc {
+            color: rgba(0,0,0,0.5);
+            margin: 6px 0;
+            margin-bottom: 12px;
+        }
+        .tags {
+            background-color: rgb(192, 221, 188);
+            color: rgb(93, 180, 130);
+        }
+        .price {
+            margin-top: 14px;
+            font-weight: 800;
+            color: rgb(235, 38, 38);
+            font-size: 16px;
+        }
+    }
+    }
    
 }

@@ -19,8 +19,7 @@ class FilterPicker extends React.Component{
 
       }
     sure=()=>{
-        this.props.sureselect(this.props.dis,arr)
-
+        this.props.picsure()
       }
     renderpicker=()=>{
         if(this.props.dis==='a'){
