@@ -66,7 +66,7 @@ class Filter extends React.Component{
       def:{...prevstate.def,[key]:value},
     }})
   }
-  //点击4个筛选项
+  //点击4个筛选项 展示对应组件
   onclickFilter=(type)=>{
     console.log(type);
     if(type==='d'){
@@ -84,6 +84,9 @@ class Filter extends React.Component{
         }
       })
     }
+    // 此时不应该能滚动给body溢出隐藏
+    this.body = document.body
+    this.body.classList.add('noscroll')
   }
   //点击筛选项组件遮罩层取消按钮关闭组件 初始化默认值
   onclickmask=(item)=>{
@@ -92,6 +95,8 @@ class Filter extends React.Component{
       dis:'',
       title:{a:false,b:false,c:false,d:false,}
     })
+    // 取消BODY的溢出隐藏
+     this.body.classList.remove('noscroll')
   }
   onclickpicitem=()=>{
     this.setState({})

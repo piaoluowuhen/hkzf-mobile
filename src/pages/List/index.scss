@@ -1,4 +1,7 @@
 .list {
+    .ReactVirtualized__List{
+        padding-bottom: 50px;
+    }
     .am-navbar {
         background-color: #f6f5f6;
         position: relative;
@@ -27,13 +30,13 @@
 
     }
     .item {
-        height: 120px;
+        height: 100px;
         border-bottom: 1px solid rgba(0,0,0,0.3);
         padding: 5px;
         padding-top: 10px;
 
     .img {
-        height: 100px;
+        height: 80px;
         img {
             height: 100%; 
             width: 100%;
@@ -41,6 +44,7 @@
     }
     .text{
         flex: 2;
+        height: 80px;
 
         .title {
             font-size: 16px;
@@ -51,20 +55,29 @@
         }
         .desc {
             color: rgba(0,0,0,0.5);
-            margin: 6px 0;
-            margin-bottom: 12px;
+            margin: 4px 0;
+            margin-bottom: 8px;
         }
         .tags {
             background-color: rgb(192, 221, 188);
             color: rgb(93, 180, 130);
         }
         .price {
-            margin-top: 14px;
+            margin-top: 4px;
             font-weight: 800;
             color: rgb(235, 38, 38);
             font-size: 16px;
         }
     }
+    }
+    .nohaouses {
+        text-align: center;
+        padding-top: 100px;
+        .text {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
     }
    
 }

@@ -1,5 +1,6 @@
 .filter {
     position: relative;
+    background-color: #fff;
     .t {
         width:  100%;
         position: absolute;
@@ -11,9 +12,12 @@
     .b {
         width:  100%;
         position: absolute;
-        bottom: -600px;
-        height: 300px;
+        bottom: -800px;
+        height: 500px;
         z-index: 1;
         background-color: rgba(43, 44, 43, 0.4) ;
     }
+}
+.noscroll {
+    overflow: hidden;
 }

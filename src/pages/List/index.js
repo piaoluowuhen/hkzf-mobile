@@ -1,22 +1,24 @@
 import React from 'react';
 import HomeSearch from '../../components/HomeSearch'
-import { NavBar, Icon,Flex } from 'antd-mobile';
+import { NavBar, Icon,Flex,Toast } from 'antd-mobile';
 import Filter from './components/Filter'
 import './index.scss'
 import axios from '../../utils/axios'
 import {AutoSizer,List,WindowScroller,InfiniteLoader} from 'react-virtualized';
+import Sticky from '../../components/Sticky'
 
 let def = {cityId: JSON.parse(localStorage.getItem('hkzf_city')).value, area: "null", mode: "null", price: "null", more: "null",start:1,end:20}
 class ListSelect extends React.Component {
   state={
    city : JSON.parse(localStorage.getItem('hkzf_city')),
    list:[],
-   count:null
+   count:1
   }
     goback=(props)=>{
        this.props.history.push('/home')
     }
     async getHouse(params){
+      Toast.loading('loading...')
       console.log(params);
       const {data:{body}}=await axios.get('/houses',{params})
       console.log(body);
@@ -24,16 +26,21 @@ class ListSelect extends React.Component {
            list:body.list,
            count:body.count
       })
+      Toast.hide()
+      if(body.count!==0){
+        Toast.info(`找到${body.count}套房源`, 1)
+      }     
     }
     //选择条件重新发送请求 给子组件调用函数
     select=(params)=>{
+      window.scrollTo(0,0)
       this.params=params
       console.log(params);
       this.getHouse(params)
     }
     componentDidMount(){
       console.log(def);
-      this.getHouse()
+      this.getHouse({cityId:this.state.city.value})
     }
     //渲染每一行数据的渲染函数
     rowRenderer=({
@@ -43,8 +50,8 @@ class ListSelect extends React.Component {
       isVisible, // 当前项在list中可见
       style, // 一定要给每一行添加 作用 每一行的位置
     })=> {
-     const {list}= this.state
-     if(!list[index]){
+     const {list,count}= this.state
+     if(!list[index]&&count!==0){
        return <div className='loading' key={key} style={style}>loading</div>
      }
       return  <Flex className='item' align='start' key={key} style={style}>
@@ -92,15 +99,18 @@ class ListSelect extends React.Component {
       onLeftClick={this.goback}
       ><div className='top'><HomeSearch city={this.state.city.label}></HomeSearch></div></NavBar>
 
-      {/* 筛选栏 */}
+      {/* 筛选栏  吸顶组件包裹Filter组件props.chilrden*/}
+      <Sticky height={40}>
       <Filter select={this.select}></Filter>
+      </Sticky>
 
-      {/* react-virtualized  list组件 */}
-      <InfiniteLoader
+      {/* react-virtualized  list组件 */}     
+      {this.state.count===0? <div className='nohaouses'><img className='imgno' src='http://localhost:8080/img/not-found.png' alt='暂无数据'></img>
+      <div className='text'>没有找到房源,更换条件</div></div>:<InfiniteLoader
     isRowLoaded={this.isRowLoaded}
     loadMoreRows={this.loadMoreRows}
     rowCount={this.state.count}
-  >
+    >
     {({ onRowsRendered, registerChild }) => (
       <WindowScroller>
     {({ height, isScrolling, onChildScroll, scrollTop }) => (
@@ -116,7 +126,7 @@ class ListSelect extends React.Component {
                 width={width}
                 height={height}
                 rowCount={this.state.count}
-                rowHeight={120}
+                rowHeight={100}
                 rowRenderer={this.rowRenderer}
                 />
             }}
@@ -124,7 +134,8 @@ class ListSelect extends React.Component {
       )}
       </WindowScroller>
       )}
-      </InfiniteLoader>
+      </InfiniteLoader>}
+    
     </div>)
     }  
  
