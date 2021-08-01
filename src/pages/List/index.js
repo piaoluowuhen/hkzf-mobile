@@ -6,7 +6,6 @@ import './index.scss'
 import axios from '../../utils/axios'
 import {AutoSizer,List,WindowScroller,InfiniteLoader} from 'react-virtualized';
 import Sticky from '../../components/Sticky'
-
 let def = {cityId: JSON.parse(localStorage.getItem('hkzf_city')).value, area: "null", mode: "null", price: "null", more: "null",start:1,end:20}
 class ListSelect extends React.Component {
   state={
@@ -100,7 +99,7 @@ class ListSelect extends React.Component {
       ><div className='top'><HomeSearch city={this.state.city.label}></HomeSearch></div></NavBar>
 
       {/* 筛选栏  吸顶组件包裹Filter组件props.chilrden*/}
-      <Sticky height={40}>
+      <Sticky heigth={40}>
       <Filter select={this.select}></Filter>
       </Sticky>
 

@@ -2,7 +2,7 @@ import { Flex } from 'antd-mobile';
 import React from 'react';
 import './index.scss'
 import { PickerView } from 'antd-mobile';
-
+import {Spring} from 'react-spring'
 let arr = []
 
 class FilterPicker extends React.Component{
@@ -24,12 +24,19 @@ class FilterPicker extends React.Component{
     renderpicker=()=>{
         if(this.props.dis==='a'){
             console.log(this.props.data);
-            return <PickerView
-            data={this.props.data}
-            onChange={this.onChange}
-            onScrollChange={this.onScrollChange}
-            value={this.props.def.a}
-          />
+            return <Spring from={{opacity:0}} to={{opacity:0}}>
+              {(props)=>{
+                         return <PickerView
+                         style={props}
+                          data={this.props.data}
+                          onChange={this.onChange}
+                          onScrollChange={this.onScrollChange}
+                          value={this.props.def.a}
+                        />
+              }}
+            </Spring>
+            
+
         } else if (this.props.dis==='b'){
            return <PickerView
            onChange={this.onChange}

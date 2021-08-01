@@ -25,7 +25,7 @@ class Sticky extends React.Component{
         // 获取页面中dom对象的位置domObject.getBoundingClientRect()
         if(this.content.current.getBoundingClientRect().top<0){
             this.content.current.classList.add('fiexd')
-            this.placeholder.current.style.height=`${heigth}'px'` 
+            this.placeholder.current.style.height=`${heigth}px` 
         }else if(this.placeholder.current.getBoundingClientRect().top>=0) {
             this.content.current.classList.remove('fiexd')
             this.placeholder.current.style.height= 0
