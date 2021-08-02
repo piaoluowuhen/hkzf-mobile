@@ -3,6 +3,7 @@ import React from 'react';
 import './index.scss'
 import { PickerView } from 'antd-mobile';
 import {Spring} from 'react-spring'
+
 let arr = []
 
 class FilterPicker extends React.Component{
@@ -24,7 +25,7 @@ class FilterPicker extends React.Component{
     renderpicker=()=>{
         if(this.props.dis==='a'){
             console.log(this.props.data);
-            return <Spring from={{opacity:0}} to={{opacity:0}}>
+            return <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
               {(props)=>{
                          return <PickerView
                          style={props}

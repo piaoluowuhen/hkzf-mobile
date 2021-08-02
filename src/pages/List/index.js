@@ -53,7 +53,7 @@ class ListSelect extends React.Component {
      if(!list[index]&&count!==0){
        return <div className='loading' key={key} style={style}>loading</div>
      }
-      return  <Flex className='item' align='start' key={key} style={style}>
+      return  <Flex className='item' align='start' key={key} style={style} onClick={()=>{this.props.history.push(`/detail/${list[index].houseCode}`)}}>
           <Flex.Item className='img'><img src={`http://localhost:8080${list[index].houseImg}`}></img></Flex.Item>
           <Flex.Item className='text'>             
           <div className='title'>{list[index].title}</div>            

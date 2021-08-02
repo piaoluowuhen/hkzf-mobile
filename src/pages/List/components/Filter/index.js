@@ -4,6 +4,7 @@ import FilterTitle from '../FilterTitle'
 import FilterPicker from '../FilterPicker'
 import FilterMore from '../FilterMore'
 import axios from '../../../../utils/axios'
+import {Spring} from 'react-spring'
 class Filter extends React.Component{
   state={
     title:{a:false,b:false,c:false,d:false,},
@@ -142,14 +143,44 @@ class Filter extends React.Component{
         return <FilterMore moresure={this.moresure} defmore={this.state.defmore} data={obj} onclickmask={this.onclickmask}></FilterMore>
     }
   }
+  //遮罩层
+  rendert(){
+    const { dis } = this.state
+    const isHide = dis === 'd' || dis=== ''
+    console.log(isHide);
+    return (
+      <Spring from={{ opacity: 0 }} to={{ opacity: isHide ? 0 : 1 }}>
+        {props => {
+          // 说明遮罩层已经完成动画效果，隐藏了
+          console.log(props.opacity);
+          if (isHide) {
+            return null
+          }
+          return (
+            <div
+              style={props}
+              className='t'
+              onClick={this.onclickmask}
+            />
+          )
+        }}
+      </Spring>)
+  }
+  renderb(){
+    if(this.state.dis==='a'||this.state.dis==='b'||this.state.dis==='c'){
+      return <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+        {props=><div style={props} className='b' onClick={this.onclickmask}></div>}
+      </Spring>
+    }
+  }
    render(){
      return  ( <div className='filter'>
       {/*   FilterTitle */}
       <FilterTitle title={this.state.title} onclickFilter={this.onclickFilter}></FilterTitle>
       
       {/* 遮罩层 */}
-      {this.state.dis==='a'||this.state.dis==='b'||this.state.dis==='c'?<div className='t' onClick={this.onclickmask}></div>:null}
-      {this.state.dis==='a'||this.state.dis==='b'||this.state.dis==='c'?<div className='b' onClick={this.onclickmask}></div>:null}
+      {this.rendert()}
+      {this.renderb()}
       {/*   FilterPicker 前三个选项的组件*/}
       {this.renderpic()}
 

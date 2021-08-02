@@ -31,7 +31,7 @@ class Map extends React.Component {
             </Flex>
             </div>
             { this.state.msgData.map(item=>
-            <Flex className='item' align='start' key={item.houseCode}>
+            <Flex className='item' align='start' key={item.houseCode} onClick={()=>{this.props.history.push(`/detail/${item.houseCode}`)}}>
               <Flex.Item className='img'><img src={`http://localhost:8080${item.houseImg}`}></img></Flex.Item>
               <Flex.Item className='text'>             
               <div className='title'>{item.title}</div>            
